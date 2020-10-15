@@ -27,9 +27,14 @@ class Cell
   end
 
   def render(visible = false)
-    if fired_upon?
+    # require "pry"; binding.pry
+    if fired_upon? && @ship != nil && ship.sunk?
+      "X"
+    elsif fired_upon? && @ship != nil
+      "H"
+    elsif fired_upon?
       "M"
-    elsif visible == true
+    elsif @ship != nil && visible == true
       "S"
     else
       "."

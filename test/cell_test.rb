@@ -89,4 +89,40 @@ class CellTest < Minitest::Test
     assert_equal ".", cell_2.render
     assert_equal "S", cell_2.render(true)
   end
+
+  def test_it_shows_ship_has_been_hit
+    cell_2 = Cell.new("C3")
+    cruiser = Ship.new("Cruiser", 3)
+
+    cell_2.place_ship(cruiser)
+    cell_2.fire_upon
+
+    assert_equal "H", cell_2.render
+  end
+
+   def test_it_can_show_a_sunk_ship
+     cell_2 = Cell.new("C3")
+     cruiser = Ship.new("Cruiser", 3)
+
+     cell_2.place_ship(cruiser)
+     cell_2.fire_upon
+     cell_2.fire_upon
+     cell_2.fire_upon
+
+     assert_equal "X", cell_2.render
+   end
+
+   def test_it_can_render_correctly
+    cell_1 = Cell.new("B4")
+    cell_2 = Cell.new("C3")
+
+    cruiser = Ship.new("Cruiser", 3)
+    cruiser2 = Ship.new("Cruiser", 3)
+
+    cell_1.place_ship(cruiser)
+    cell_2.place_ship(cruiser2)
+
+    assert_equal ".", cell_1.render
+    assert_equal "S", cell_2.render(true)
+   end
 end
