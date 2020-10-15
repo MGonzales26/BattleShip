@@ -27,4 +27,38 @@ class Board
       cell.coordinate == coord
     end
   end
+  
+  valid_ship_length
+  # ship length = placment
+
+  def valid_placement?(ship, placement)
+   valid_coordinate
+
+    ship.length == placement.count
+    valid_coordinate?
+    valid_ship_length
+    # numbers consecutive
+    # letters consecutive
+  end
+
+  placement.each_cons(ship.length) do |place|
+    require 'pry'; binding.pry
+    # end
+    # if ship.length == placement.count
 end
+
+# A = 1
+# B = 2
+# C = 3
+
+# a = 95
+# b = 96
+# c = 97
+
+# ? = 150
+
+# 1 = 238
+# 2 = 239
+# 3 = 240
+
+
