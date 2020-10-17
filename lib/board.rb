@@ -75,7 +75,8 @@ class Board
   def valid_placement?(ship, placement)
     valid_ship_length?(ship, placement) &&
     (numbers_consecutive?(placement) || letters_consecutive?(placement)) &&
-    !(numbers_consecutive?(placement) && letters_consecutive?(placement))
+    !(numbers_consecutive?(placement) && letters_consecutive?(placement)) &&
+    !overlap?(placement)
   end
 
   def place(ship, placement)
@@ -84,4 +85,9 @@ class Board
     end
   end
 
+  def overlap?(placement)
+    !placement.all? do |place|
+      @cells[place].empty?
+    end
+  end
 end
