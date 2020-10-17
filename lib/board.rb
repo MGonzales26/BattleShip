@@ -30,8 +30,6 @@ class Board
     cells
   end
 
-  # require 'pry'; binding.pry
-
   def valid_coordinate?(coord)
     @cells.any? do |name, cell|
       cell.coordinate == coord
@@ -43,78 +41,54 @@ class Board
   end
 
   def isolate_numbers(placement)
-      placement.map do |place|
+    placement.map do |place|
       place[1].to_i
     end
   end
-
+# change the word something to a better name
   def numbers_consecutive?(placement)
-    # require "pry"; binding.pry
-  something = @rows.each_cons(placement.count).to_a
-  something.any? do |some|
-    isolate_numbers(placement) == some
+    something = @rows.each_cons(placement.count).to_a
+    something.any? do |some|
+      isolate_numbers(placement) == some
     end
   end
-    # numbers = []
-    # placement.each do |place|
-    #   numbers << place.chars[1].ord
-    # # end
-    # # require 'pry'; binding.pry
-    # numbers.each_cons(placement.count).any? do |number|
-    # end
-    # numbers
-    def isolate_letters(placement)
-      placement.map do |place|
-        place[0].ord
-      end
+
+  def isolate_letters(placement)
+    placement.map do |place|
+      place[0].ord
     end
+  end
+
+  def ord_columns
+    @columns.map do |letter|
+      letter.ord
+    end
+  end
 
   def letters_consecutive?(placement)
-    range.to_a.map do |letter|
-      letter.ord
-    end.each_cons(3).to_a
+    something_else = ord_columns.each_cons(placement.count).to_a
+    something_else.any? do |some|
+      isolate_letters(placement) == some
+    end
   end
 
-  # def valid_placement?(ship, placement)
-    # valid_ship_length(ship, placement) && (numbers_consecutive?(placement) || letters_consecutive?)
+  def valid_placement?(ship, placement)
+    valid_ship_length?(ship, placement) &&
+    (numbers_consecutive?(placement) || letters_consecutive?(placement)) &&
+    !(numbers_consecutive?(placement) && letters_consecutive?(placement))
+  end
+end
 
-  #   # ship.length == placement.count
+  # ship.length == placement.count
   #
   #   # valid_coordinate
   #   # valid_coordinate?
   #   # valid_ship_length
   #   # numbers consecutive
   #   # letters consecutive
-  # end
+
 
   # placement.each_cons(ship.length) do |place|
   #   require 'pry'; binding.pry
     # end
     # if ship.length == placement.count
-end
-
-# A = 1
-# B = 2
-# C = 3
-
-# a = 95
-# b = 96
-# c = 97
-
-# ? = 150
-
-# 1 = 238
-# 2 = 239
-# 3 = 240
-
-#    1 2 3 4 . . . 26
-#  A . . . .
-#  B . . . .
-#  C . . . .
-#  D . . . .
-#  .
-#  .
-#  .
-#  Z
-# end
-# end
