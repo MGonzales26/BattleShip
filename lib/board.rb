@@ -45,11 +45,11 @@ class Board
       place[1].to_i
     end
   end
-# change the word something to a better name
+
   def numbers_consecutive?(placement)
-    something = @rows.each_cons(placement.count).to_a
-    something.any? do |some|
-      isolate_numbers(placement) == some
+     number_group = @rows.each_cons(placement.count).to_a
+    number_group.any? do |numbers|
+      isolate_numbers(placement) == numbers
     end
   end
 
@@ -66,9 +66,9 @@ class Board
   end
 
   def letters_consecutive?(placement)
-    something_else = ord_columns.each_cons(placement.count).to_a
-    something_else.any? do |some|
-      isolate_letters(placement) == some
+    letter_group = ord_columns.each_cons(placement.count).to_a
+    letter_group.any? do |letters|
+      isolate_letters(placement) == letters
     end
   end
 
@@ -77,18 +77,11 @@ class Board
     (numbers_consecutive?(placement) || letters_consecutive?(placement)) &&
     !(numbers_consecutive?(placement) && letters_consecutive?(placement))
   end
+
+  def place(ship, placement)
+    placement.each do |place|
+      @cells[place].place_ship(ship)
+    end
+  end
+
 end
-
-  # ship.length == placement.count
-  #
-  #   # valid_coordinate
-  #   # valid_coordinate?
-  #   # valid_ship_length
-  #   # numbers consecutive
-  #   # letters consecutive
-
-
-  # placement.each_cons(ship.length) do |place|
-  #   require 'pry'; binding.pry
-    # end
-    # if ship.length == placement.count
