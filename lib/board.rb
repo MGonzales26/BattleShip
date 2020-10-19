@@ -72,9 +72,17 @@ class Board
     end
   end
 
+  def numbers_same?(placement)
+    isolate_numbers(placement).uniq.count == 1
+  end
+  
+  def letters_same?(placement)
+    isolate_letters(placement).uniq.count == 1
+  end
+
   def valid_placement?(ship, placement)
     valid_ship_length?(ship, placement) &&
-    (numbers_consecutive?(placement) || letters_consecutive?(placement)) &&
+    ((numbers_consecutive?(placement)  && letters_same?(placement)) || (letters_consecutive?(placement) && numbers_same?(placement))) &&
     !(numbers_consecutive?(placement) && letters_consecutive?(placement)) &&
     !overlap?(placement)
   end
