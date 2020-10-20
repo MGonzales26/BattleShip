@@ -121,7 +121,7 @@ class BoardTest < Minitest::Test
 
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
-    
+
     assert_equal false, board.valid_placement?(cruiser, ["A1", "A2", "A4"])
     assert_equal false, board.valid_placement?(submarine, ["A1", "C1"])
     assert_equal false, board.valid_placement?(cruiser, ["A3", "A2", "A1"])
