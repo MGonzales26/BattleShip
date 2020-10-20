@@ -75,7 +75,7 @@ class Board
   def numbers_same?(placement)
     isolate_numbers(placement).uniq.count == 1
   end
-  
+
   def letters_same?(placement)
     isolate_letters(placement).uniq.count == 1
   end
