@@ -7,8 +7,12 @@ class Game
     @computer = Computer.new
   end
 
-  def main_menu
+  def welcome
     puts "Welcome to BATTLESHIP"
+    main_menu
+  end
+
+  def main_menu
     puts "Enter p to play. Enter q to quit."
     input = gets.chomp.upcase
     if input == "P"
@@ -34,6 +38,7 @@ class Game
       display_boards
       player_shot
       computer_shot
+      end_game
       # player_result(input)
     #computer results
     #winner?
@@ -78,6 +83,7 @@ class Game
     elsif @computer.board.cells[input].render ==  "H"
       puts "Your shot on #{input} was a hit."
     elsif  @computer.board.cells[input].render ==  "X"
+        @computer.ship_count -= 1
       puts "Your shot on #{input} sunk the ship."
     end
   end
@@ -88,7 +94,26 @@ class Game
     elsif @player.board.cells[shot].render ==  "H"
       puts "My shot on #{shot} was a hit."
     elsif  @player.board.cells[shot].render ==  "X"
+      @player.ship_count -= 1
       puts "My shot on #{shot} sunk your ship."
+    end
+  end
+
+  def start_new_game
+    next_game = Game.new
+    next_game.main_menu
+  end
+
+  def end_game
+    if @player.ship_count == 0 && @computer.ship_count == 0
+      puts "It's a tie."
+      start_new_game
+    elsif @player.ship_count == 0
+      puts "What makes you think you could ever defeat me?! I was created by Yesi and Megan!"
+      start_new_game
+    elsif @computer.ship_count == 0
+      puts "You won."
+      start_new_game
     end
   end
 end
