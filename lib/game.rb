@@ -26,20 +26,47 @@ class Game
     player.setup
     player.place_cruiser
     player.place_submarine
+    turn
   end
 
   def turn
-    display_boards
-    #player shot
-    #computer shot
+    loop do 
+      display_boards
+      player_shot
+      computer_shot
     #player results
     #computer results
+    #winner?
+    end
   end
 
   def display_boards
     puts "=============COMPUTER BOARD============="
     puts @computer.board.render
     puts "==============PLAYER BOARD=============="
-    puts @player.board.render
+    puts @player.board.render(true)
+  end
+
+  def player_shot
+    p "Enter the coordinate for your shot:"
+    loop do
+      input = gets.chomp.upcase
+      if @computer.board.valid_coordinate?(input) && !(@computer.board.cells[input].fired_upon?)
+        @computer.board.cells[input].fire_upon
+        break
+      else
+        p "Please enter a valid coordinate:"
+      end
+    end
+  end
+
+  def computer_shot
+    loop do
+      shot = @player.board.cells.keys.sample
+      if @player.board.valid_coordinate?(shot) && !(@player.board.cells[shot].fired_upon?)
+        @player.board.cells[shot].fire_upon
+        break
+      end
+    end
   end
 end

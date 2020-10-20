@@ -4,6 +4,9 @@ require './lib/ship'
 require './lib/cell'
 require './lib/board'
 require './lib/game'
+require './lib/player'
+require './lib/computer'
+
 
 class GameTest < Minitest::Test
 
@@ -14,11 +17,18 @@ class GameTest < Minitest::Test
   end
 
   def test_main_menu
+    skip
     game = Game.new
 
     expected = "Welcome to BATTLESHIP \n" +
     "Enter p to play. Enter q to quit."
 
     assert_equal expected, game.main_menu
+  end
+
+  def test_player_shot
+    game = Game.new
+
+    game.computer_shot
   end
 end
