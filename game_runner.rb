@@ -7,4 +7,4 @@ require './lib/computer'
 
 game = Game.new
 
-game.main_menu
+game.welcome
