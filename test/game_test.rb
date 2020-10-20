@@ -31,4 +31,25 @@ class GameTest < Minitest::Test
 
     game.computer_shot
   end
+
+  def test_it_can_display_player_shots
+    skip
+    game = Game.new
+
+    expected = "Your shot on A4 was a miss."
+
+    game.player_shot
+
+    assert_equal expected, game.player_result("A4")
+  end
+
+  def test_it_can_display_computer_shots
+    skip
+    game = Game.new
+
+    expected = "My shot on C1 was a miss."
+
+    assert_equal expected, game.computer_result
+  end
+
 end
