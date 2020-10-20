@@ -51,5 +51,13 @@ class GameTest < Minitest::Test
 
     assert_equal expected, game.computer_result
   end
+  # def method_name
+  #
+  # end
+  def test_it_knows_end_game
+    game = Game.new
+
+    game.end_game
+  end
 
 end
