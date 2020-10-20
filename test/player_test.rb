@@ -5,6 +5,7 @@ require './lib/cell'
 require './lib/board'
 require './lib/game'
 require './lib/player'
+require './lib/computer'
 
 class PlayerTest < Minitest::Test
 
@@ -23,18 +24,21 @@ class PlayerTest < Minitest::Test
   end
 
   def test_place_cruiser
+    skip
     player = Player.new
 
     expected = "  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n"
 
     assert_equal expected, player.place_cruiser
   end
-  
+
   def test_place_submarine
     player = Player.new
 
     expected = "  1 2 3 4 \nA S S . . \nB . . . . \nC . . . . \nD . . . . \n"
-
+player.player_shot
     assert_equal expected, player.place_submarine
   end
+
+
 end
