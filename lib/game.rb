@@ -8,8 +8,8 @@ class Game
   end
 
   def main_menu
-    p "Welcome to BATTLESHIP "
-    p "Enter p to play. Enter q to quit."
+    puts "Welcome to BATTLESHIP"
+    puts "Enter p to play. Enter q to quit."
     input = gets.chomp.upcase
     if input == "P"
       setup
@@ -30,11 +30,11 @@ class Game
   end
 
   def turn
-    loop do 
+    loop do
       display_boards
       player_shot
       computer_shot
-    #player results
+      # player_result(input)
     #computer results
     #winner?
     end
@@ -48,14 +48,15 @@ class Game
   end
 
   def player_shot
-    p "Enter the coordinate for your shot:"
+    puts "Enter the coordinate for your shot:"
     loop do
       input = gets.chomp.upcase
       if @computer.board.valid_coordinate?(input) && !(@computer.board.cells[input].fired_upon?)
         @computer.board.cells[input].fire_upon
+        player_result(input)
         break
       else
-        p "Please enter a valid coordinate:"
+        puts "Please enter a valid coordinate:"
       end
     end
   end
@@ -65,8 +66,29 @@ class Game
       shot = @player.board.cells.keys.sample
       if @player.board.valid_coordinate?(shot) && !(@player.board.cells[shot].fired_upon?)
         @player.board.cells[shot].fire_upon
+        computer_result(shot)
         break
       end
+    end
+  end
+
+  def player_result(input)
+    if @computer.board.cells[input].render ==  "M"
+      puts "Your shot on #{input} was a miss."
+    elsif @computer.board.cells[input].render ==  "H"
+      puts "Your shot on #{input} was a hit."
+    elsif  @computer.board.cells[input].render ==  "X"
+      puts "Your shot on #{input} sunk the ship."
+    end
+  end
+
+  def computer_result(shot)
+    if @player.board.cells[shot].render ==  "M"
+      puts "My shot on #{shot} was a miss."
+    elsif @player.board.cells[shot].render ==  "H"
+      puts "My shot on #{shot} was a hit."
+    elsif  @player.board.cells[shot].render ==  "X"
+      puts "My shot on #{shot} sunk your ship."
     end
   end
 end
