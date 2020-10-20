@@ -1,5 +1,6 @@
 class Player
-  attr_reader :cruiser,
+  attr_reader :board,
+              :cruiser,
               :submarine,
               :ship_count
 
@@ -10,6 +11,13 @@ class Player
     @ship_count = 2
   end
 
+  def setup
+    p "I have laid out my ships on the grid."
+    p "You now need to lay out your two ships."
+    p "The Cruiser is three units long and the Submarine is two units long."
+    puts @board.render(true)
+  end
+  
   def place_cruiser
     loop do
       p "Enter the squares for the Cruiser (3 spaces):"
@@ -21,7 +29,7 @@ class Player
         p "Those are not valid Coordinates. Please try again:"
       end
     end
-    @board.render(true)
+    puts @board.render(true)
   end
 
   def place_submarine
@@ -35,6 +43,6 @@ class Player
         p "Those are not valid coordinates. Please try again:"
       end
     end
-    @board.render(true)
+    puts @board.render(true)
   end
 end
