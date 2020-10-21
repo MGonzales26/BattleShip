@@ -99,11 +99,73 @@ class Board
     end
   end
 
+  def first_line
+    line_1 = "  "
+    @rows.each do |row|
+      line_1 += row.to_s + " "
+    end
+    line_1 += "\n"
+  end
+
+  def expanded_board(visible = false)
+    @columns.map do |column|
+      @cells.keys.map do |coord|
+        rendered_cells = ""
+        if coord[0] == column
+          rendered_cells += " #{@cells[coord].render(visible)}"
+        end
+      end
+    end
+  end
+
+  def compressed_board(visible = false)
+    column_indexes = {}
+    @columns.each_with_index do |column, index|
+      column_indexes[column] = index
+    end
+    column_indexes.map do |start, index|
+      start + expanded_board(visible)[index].compact.join
+    end
+  end
+
   def render(visible = false)
-    "  1 2 3 4 \n" +
-    "A #{@cells["A1"].render(visible)} #{@cells["A2"].render(visible)} #{@cells["A3"].render(visible)} #{@cells["A4"].render(visible)} \n" +
-    "B #{@cells["B1"].render(visible)} #{@cells["B2"].render(visible)} #{@cells["B3"].render(visible)} #{@cells["B4"].render(visible)} \n" +
-    "C #{@cells["C1"].render(visible)} #{@cells["C2"].render(visible)} #{@cells["C3"].render(visible)} #{@cells["C4"].render(visible)} \n" +
-    "D #{@cells["D1"].render(visible)} #{@cells["D2"].render(visible)} #{@cells["D3"].render(visible)} #{@cells["D4"].render(visible)} \n"
+    # line_1 = "   "
+    # @rows.each do |row|
+    #   line_1 += row.to_s + " "
+    # end
+    # line_1 += "\n"
+    # expanded_board = @columns.map do |column|
+    #   @cells.keys.map do |coord|
+    #     rendered_cells = ""
+    #     if coord[0] == column
+    #       rendered_cells += " #{@cells[coord].render(visible)}"
+    #     end
+    #   end
+    # end
+    
+    # column_indexes = {}
+    # @columns.each_with_index do |column, index|
+    #   column_indexes[column] = index
+    # end
+    # compressed_board = column_indexes.map do |start, index|
+    #   start + expanded_board(visible)[index].compact.join
+    # end
+    
+    board = ""
+    compressed_board(visible).each do |line|
+      board += line + "\n"
+    end
+
+    first_line + 
+    board
+    # combined = 
+    # combined#.gsub("  ", " ")
+    # require 'pry'; binding.pry
+    # require 'pry'; binding.pry
+    # "  1 2 3 4 \n" +
+    # "A #{@cells["A1"].render(visible)} #{@cells["A2"].render(visible)} #{@cells["A3"].render(visible)} #{@cells["A4"].render(visible)} \n" +
+    # "B #{@cells["B1"].render(visible)} #{@cells["B2"].render(visible)} #{@cells["B3"].render(visible)} #{@cells["B4"].render(visible)} \n" +
+    # "C #{@cells["C1"].render(visible)} #{@cells["C2"].render(visible)} #{@cells["C3"].render(visible)} #{@cells["C4"].render(visible)} \n" +
+    # "D #{@cells["D1"].render(visible)} #{@cells["D2"].render(visible)} #{@cells["D3"].render(visible)} #{@cells["D4"].render(visible)} \n"
   end
 end

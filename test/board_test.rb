@@ -179,7 +179,7 @@ class BoardTest < Minitest::Test
 
     board.place(cruiser, ["A1", "A2", "A3"])
 
-    expected = "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
+    expected = "  1 2 3 4 \nA . . . .\nB . . . .\nC . . . .\nD . . . .\n"
 
     assert_equal expected, board.render
   end
@@ -191,7 +191,7 @@ class BoardTest < Minitest::Test
 
     board.place(cruiser, ["A1", "A2", "A3"])
 
-    expected = "  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n"
+    expected = "  1 2 3 4 \nA S S S .\nB . . . .\nC . . . .\nD . . . .\n"
 
     assert_equal expected, board.render(true)
   end
@@ -207,7 +207,7 @@ class BoardTest < Minitest::Test
     cell_2.fire_upon
     cell_3.fire_upon
 
-    expected = "  1 2 3 4 \nA M M M . \nB . . . . \nC . . . . \nD . . . . \n"
+    expected = "  1 2 3 4 \nA M M M .\nB . . . .\nC . . . .\nD . . . .\n"
 
     assert_equal expected, board.render
   end
@@ -226,8 +226,8 @@ class BoardTest < Minitest::Test
     cell_1.fire_upon
     cell_3.fire_upon
 
-    expected = "  1 2 3 4 \nA H . H . \nB . . . . \nC . . . . \nD . . . . \n"
-
+    expected = "  1 2 3 4 \nA H . H .\nB . . . .\nC . . . .\nD . . . .\n"
+# require 'pry'; binding.pry
     assert_equal expected, board.render
   end
 
@@ -246,8 +246,28 @@ class BoardTest < Minitest::Test
     cell_2.fire_upon
     cell_3.fire_upon
 
-    expected = "  1 2 3 4 \nA X X X . \nB . . . . \nC . . . . \nD . . . . \n"
+     expected = "  1 2 3 4 \nA X X X .\nB . . . .\nC . . . .\nD . . . .\n"
 
     assert_equal expected, board.render
   end
+
+  def test_first_line
+    board = Board.new
+
+    assert_equal "  1 2 3 4 \n", board.first_line
+  end
+
+  def test_expanded_board
+    board = Board.new
+
+    expected = [[" .", " .", " .", " .", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil],
+    [nil, nil, nil, nil, " .", " .", " .", " .", nil, nil, nil, nil, nil, nil, nil, nil],
+    [nil, nil, nil, nil, nil, nil, nil, nil, " .", " .", " .", " .", nil, nil, nil, nil],
+    [nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, " .", " .", " .", " ."]]
+
+    assert_equal expected, board.expanded_board
+    # require 'pry'; binding.pry
+  end
+
+
 end
