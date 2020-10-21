@@ -1,12 +1,12 @@
 class Cell
-  attr_reader :coordinate, 
+  attr_reader :coordinate,
               :ship,
               :hit
 
   def initialize(coordinate)
     @coordinate = coordinate
-    @ship = nil
-    @hit = false
+    @ship       = nil
+    @hit        = false
   end
 
   def empty?

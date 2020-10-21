@@ -33,12 +33,11 @@ class PlayerTest < Minitest::Test
   end
 
   def test_place_submarine
+    skip 
     player = Player.new
 
     expected = "  1 2 3 4 \nA S S . . \nB . . . . \nC . . . . \nD . . . . \n"
-player.player_shot
+
     assert_equal expected, player.place_submarine
   end
-
-
 end

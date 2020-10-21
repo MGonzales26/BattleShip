@@ -47,7 +47,7 @@ class Board
   end
 
   def numbers_consecutive?(placement)
-     number_group = @rows.each_cons(placement.count).to_a
+    number_group = @rows.each_cons(placement.count).to_a
     number_group.any? do |numbers|
       isolate_numbers(placement) == numbers
     end

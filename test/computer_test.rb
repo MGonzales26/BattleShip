@@ -25,7 +25,7 @@ class ComputerTest < Minitest::Test
 
   def test_it_can_place_cruiser
     computer = Computer.new
-require 'pry'; binding.pry
+
     computer.place_cruiser
   end
 end

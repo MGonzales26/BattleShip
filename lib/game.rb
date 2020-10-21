@@ -3,7 +3,7 @@ class Game
               :computer
 
   def initialize
-    @player = Player.new
+    @player   = Player.new
     @computer = Computer.new
   end
 
@@ -85,7 +85,7 @@ class Game
     elsif @computer.board.cells[input].render ==  "H"
       puts "Your shot on #{input} was a hit."
     elsif  @computer.board.cells[input].render ==  "X"
-        @computer.ship_count -= 1
+      @computer.ship_count -= 1
       puts "Your shot on #{input} sunk the ship."
     end
   end

@@ -26,7 +26,8 @@ class GameTest < Minitest::Test
     assert_equal expected, game.main_menu
   end
 
-  def test_player_shot
+  def test_computer_shot
+    skip
     game = Game.new
 
     game.computer_shot
@@ -51,13 +52,12 @@ class GameTest < Minitest::Test
 
     assert_equal expected, game.computer_result
   end
-  # def method_name
-  #
-  # end
+
   def test_it_knows_end_game
     game = Game.new
 
-    game.end_game
-  end
+    game.player.ship_count = 0
 
+    assert_equal true, game.end_game
+  end
 end
