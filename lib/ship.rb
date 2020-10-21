@@ -10,11 +10,7 @@ attr_reader :name,
   end
 
   def sunk?
-    if @health == 0
-      true
-    else
-      false
-    end
+    @health == 0
   end
 
   def hit
