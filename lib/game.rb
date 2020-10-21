@@ -18,9 +18,10 @@ class Game
     if input == "P"
       setup
     elsif input == "Q"
-      "Bye, loser!"
+      puts "Bye, loser!"
     else
-      "Mind your p's and q's."
+      puts "Mind your p's and q's."
+      main_menu
     end
   end
 
@@ -38,10 +39,11 @@ class Game
       display_boards
       player_shot
       computer_shot
-      end_game
-      # player_result(input)
-    #computer results
-    #winner?
+      sleep(2.5)
+      if end_game
+        start_new_game
+        break
+      end
     end
   end
 
@@ -55,7 +57,7 @@ class Game
   def player_shot
     puts "Enter the coordinate for your shot:"
     loop do
-      input = gets.chomp.upcase
+      input = gets.chomp.upcase.strip
       if @computer.board.valid_coordinate?(input) && !(@computer.board.cells[input].fired_upon?)
         @computer.board.cells[input].fire_upon
         player_result(input)
@@ -107,13 +109,13 @@ class Game
   def end_game
     if @player.ship_count == 0 && @computer.ship_count == 0
       puts "It's a tie."
-      start_new_game
+      true
     elsif @player.ship_count == 0
       puts "What makes you think you could ever defeat me?! I was created by Yesi and Megan!"
-      start_new_game
+      true
     elsif @computer.ship_count == 0
       puts "You won."
-      start_new_game
+      true
     end
   end
 end
