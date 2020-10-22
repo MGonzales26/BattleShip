@@ -22,6 +22,7 @@ class Player
     loop do
       p "Enter the squares for the Cruiser (3 spaces):"
       input =  gets.chomp.upcase
+      # require 'pry'; binding.pry
       if @board.valid_placement?(@cruiser, input.split)
         @board.place(@cruiser, input.split)
         break

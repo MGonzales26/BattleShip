@@ -28,7 +28,7 @@ class GameTest < Minitest::Test
 
   def test_player_shot
     game = Game.new
-
+require 'pry'; binding.pry
     game.computer_shot
   end
 end
